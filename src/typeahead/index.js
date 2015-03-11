@@ -21,7 +21,8 @@ var Typeahead = React.createClass({
     defaultValue: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     onOptionSelected: React.PropTypes.func,
-    onKeyDown: React.PropTypes.func
+    onKeyDown: React.PropTypes.func,
+    showListOnLoad: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -31,14 +32,15 @@ var Typeahead = React.createClass({
       defaultValue: "",
       placeholder: "",
       onKeyDown: function(event) { return },
-      onOptionSelected: function(option) { }
+      onOptionSelected: function(option) { },
+      showListOnLoad: false
     };
   },
 
   getInitialState: function() {
     return {
       // The currently visible set of options
-      visible: this.getOptionsForValue(this.props.defaultValue, this.props.options),
+      visible: this.getDefaultOptionsVisible(),
 
       // This should be called something else, "entryValue"
       entryValue: this.props.defaultValue,
@@ -48,6 +50,11 @@ var Typeahead = React.createClass({
     };
   },
 
+  getDefaultOptionsVisible: function(){
+    if (this.props.showListOnLoad){ return ''; }
+
+    return this.getOptionsForValue(this.props.defaultValue, this.props.options);
+  },
   getOptionsForValue: function(value, options) {
     var result = fuzzy.filter(value, options).map(function(res) {
       return res.string;

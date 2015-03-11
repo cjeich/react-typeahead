@@ -28,7 +28,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/fmoo/react-typeahead.git"
+    "url": "https://github.com/cjeich/react-typeahead.git"
   },
   "dependencies": {
     "fuzzy": "^0.1.0",
