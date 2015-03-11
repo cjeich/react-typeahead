@@ -51,7 +51,7 @@ var Typeahead = React.createClass({
   },
 
   getDefaultOptionsVisible: function(){
-    if (this.props.showListOnLoad){ return ''; }
+    if (!this.props.showListOnLoad){ return ''; }
 
     return this.getOptionsForValue(this.props.defaultValue, this.props.options);
   },
